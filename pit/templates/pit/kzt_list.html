@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Transactions</title>
+    </head>
+    <body>
+{% for Transaction in transactions %}
+    <div>
+        <p>published: {{ Transaction.date }}</p>
+        <h1><a href="">{{ Transaction.amount }}</a></h1>
+        <p>{{ Transaction.description|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+    </body>
+</html>
