@@ -4,7 +4,7 @@ from django.utils import timezone
 class Dog(models.Model):
   url = models.CharField(max_length=1000,default="", blank=True)
   name = models.CharField(max_length=1000,default="", blank=True)
-  description = models.CharField(max_length=1000,default="", blank=True)
+  description = models.TextField()
   date = models.DateTimeField(default=timezone.now)
   
   def __str__(self):
@@ -12,8 +12,8 @@ class Dog(models.Model):
 
 class Transaction(models.Model):
   date = models.DateTimeField(default=timezone.now)
-  description = models.CharField(max_length=1000, default="no description")
-  amount = models.IntegerField(default=0)
+  description = models.TextField()
+  amount = models.IntegerField()
 
   def __str__(self):
     return self.description + " " + str(self.amount) + " kzt"

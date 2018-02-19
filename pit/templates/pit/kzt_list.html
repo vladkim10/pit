@@ -5,10 +5,13 @@
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
        <link rel="stylesheet" href="{% static 'css/pit.css' %}">
+       <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
        </head>
     <body>
 <div class="page-header">
-    <h1><center>History of transactions</center></h1>
+        <h1><center>History of transactions</center></h1>
 </div>
 <div>
 <table class="table" style="width: 80%"; align="center">
@@ -16,7 +19,7 @@
     <tr>
         <th>Дата</th>
         <th>Описание</th>
-        <th>Сумма</a></th>
+        <th style ="text-align: right">Сумма(тг.)</a></th>
     </tr>
    </thead>
    <tbody>
@@ -29,6 +32,8 @@
 {% endfor %}
     </tbody>
 </table>
+<a class="btn btn-dark" href="{% url "index" %}" role="button" style="margin-left: 10em;">Main page</a>
+<a href="{% url 'transaction_new' %}" class = "btn btn-success"><span class="glyphicon glyphicon-plus"></span><strong>+</strong> Add transaction</a>
 </div>
     </body>
 </html>
