@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<html>
+    <head>
+       <title>Main</title>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+       <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
+       <link rel="stylesheet" href="{% static 'css/pit.css' %}">
+       <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    </head>
+    <body>
+    <h1><center>New transaction</center></h1>
+     <form method="POST" class="transaction-form">{% csrf_token %}
+       {{ form.as_p }}
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Save</button>
+        <a class="btn btn-dark" href="{% url "kzt_list" %}" role="button" style="margin: 2em">See transactions</a>
+    </form>
+    </body>
+</html>

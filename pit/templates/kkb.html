@@ -1,0 +1,15 @@
+<div class="modal-footer">
+    <form name="SendOrder" method="POST" action="https://testpay.kkb.kz/jsp/process/logon.jsp">
+        <div class="selectContainer">
+            <input type="submit" id="submit" class="form-control btn btn-default" value="Сделать донат">
+        </div>
+        <div id="login-error-div"
+             style="margin-bottom: 10px; text-align: center; color: red"></div>
+        <input type="hidden" name="BackLink" value="http://shymbulak.papers.kz/online_booking/">
+        <input type="hidden" name="PostLink" value="http://shymbulak.papers.kz/online_booking//success/">
+        <input type="hidden" name="FailureBackLink" value="http://shymbulak.papers.kz/online_booking/">
+        <input type="hidden" id="Signed_Order_B64" name="Signed_Order_B64" value="{{ kkb_context }}">
+        <span hidden="hidden" id="order_id">aksjk22</span>
+        <span hidden="hidden" id="price_hidden">2000</span>
+    </form>
+  </div>

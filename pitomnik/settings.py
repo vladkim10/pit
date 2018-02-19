@@ -42,13 +42,13 @@ INSTALLED_APPS = [
 ]
 
 #KKB EPAY SETTING
-MERCHANT_CERTIFICATE_ID = "00c183d70b" # Серийный номер сертификата Cert Serial Number
-MERCHANT_NAME = "Test shop 3" # Название магазина (продавца) Shop/merchant Name
+MERCHANT_CERTIFICATE_ID = "00c183d70b" 
+MERCHANT_NAME = "Test shop 3" 
 PRIVATE_KEY_FN = os.path.join(BASE_DIR, 'kkb','test_certificates','cert.prv')
 print("settings",BASE_DIR,PRIVATE_KEY_FN)
-PRIVATE_KEY_PASS = "1q2w3e4r" # Пароль к закрытому ключу Private cert password
+PRIVATE_KEY_PASS = "1q2w3e4r" 
 PUBLIC_KEY_FN = os.path.join(BASE_DIR, 'kkb', 'test_certificates', 'kkbca.pem')
-MERCHANT_ID = "92061103" # Терминал ИД в банковской Системе
+MERCHANT_ID = "92061103" 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
