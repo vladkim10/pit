@@ -1,0 +1,12 @@
+<div class="modal-footer">
+    <form name="SendOrder" method="POST">
+        {% csrf_token %}
+        <div class="selectContainer">
+            <input type="submit" id="submit" class="form-control btn btn-default" value="Сделать донат">
+        </div>
+        <div id="login-error-div"
+             style="margin-bottom: 10px; text-align: center; color: red"></div>
+        Введите сумму для доната
+        <input type = "numeric" name="price" value = 1000>
+    </form>
+  </div>

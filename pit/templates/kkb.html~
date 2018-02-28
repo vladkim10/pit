@@ -2,7 +2,7 @@
     <form name="SendOrder" method="POST" action="https://testpay.kkb.kz/jsp/process/logon.jsp">
 	<input type="hidden" name="BackLink" value="http://http://vladkim10.pythonanywhere.com/transactions">
         <input type="hidden" name="PostLink" value="http://http://vladkim10.pythonanywhere.com/success">
-        <input type="hidden" name="FailureBackLink" value="http://127.0.0.1:8000/donate">
+        <input type="hidden" name="FailureBackLink" value="http://shymbulak.papers.kz/online_booking/">
         <input type="hidden" id="Signed_Order_B64" name="Signed_Order_B64" value="{{ kkb_context }}">
 	<input type="hidden" id="order_id" name="order_id" value="{{ order_id }}">
         <input type="submit" id="submit" class="form-control btn btn-default" value="Сделать донат {{ price }} тенге">
