@@ -11,7 +11,7 @@ import kkb
 def kkb_init(request):
 
     if request.method == "POST":
-        order_id = "456544"
+        order_id = "".join([str(random.randint(0, 9)) for i in range(random.randint(10, 15))])
         kkb_context = kkb.get_context(order_id = order_id, amount=str(request.POST["price"]), currency_id="398")
         return render(request, 'kkb.html', context = {"kkb_context": kkb_context, "order_id": order_id, "price": request.POST["price"]})
     
