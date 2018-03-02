@@ -6,6 +6,7 @@ from .models import Dog
 from .forms import TransactionForm
 from .forms import DogForm
 import kkb
+import random
 # Create your views here.
 
 def kkb_init(request):
