@@ -1,10 +1,8 @@
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from braces.views import CsrfExemptMixin
 from .models import Transaction
 from .models import Dog
 from .forms import TransactionForm
@@ -12,11 +10,6 @@ from .forms import DogForm
 import kkb
 # Create your views here.
 
-class Object(CsrfExemptMixin, APIView):
-    authentication_classes = []
-
-    def post(self, request, format=None):
-        return Response({'received data': request.data})
 
 def kzt_list(request):
     transactions = Transaction.objects.filter(date__lte=timezone.now()).order_by('date')
@@ -37,6 +30,7 @@ def success(request):
          transaction.date = timezone.now()
          transaction.amount = int(result.data['ORDER_AMOUNT'])
          transaction.save()
+         return HttpResponse("Your response")
          return render(request, 'pit/message.html', {'message': 'success!!! added ' + str(transaction.amount) + ' KZT!'})
       else:
          return render(request, 'pit/message.html', {'message': "we've got problem: " + result.message})
