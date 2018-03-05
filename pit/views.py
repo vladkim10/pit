@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from .models import Transaction
 from .models import Dog
 from .forms import TransactionForm
@@ -13,6 +14,7 @@ def kzt_list(request):
     transactions = Transaction.objects.filter(date__lte=timezone.now()).order_by('date')
     return render(request, 'pit/kzt_list.html', {'transactions': transactions})
 
+@csrf_exempt
 def success(request):
     transaction = Transaction()
     transaction.description = "dumb"

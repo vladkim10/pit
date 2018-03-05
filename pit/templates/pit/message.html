@@ -18,5 +18,12 @@
     <h1> {{ message }} </h1>
     <a class="btn btn-dark" href="{% url "kzt_list" %}" role="button" style="margin: 2em">See transactions</a>
 </div>
+<div>
+  <form method="post">
+     <input name="ORDER_AMOUNT" placeholder="1000">
+     <input name="CUSTOMER_NAME" placeholder="Имя">
+     <button type="submit">TEST</button>
+  </form>
+</div>
     </body>
 </html>
