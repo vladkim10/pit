@@ -24,6 +24,7 @@ SECRET_KEY = 'n6g#arb!7lithfe)dor#b_1@*u@i_gz(zwax77=3fv$1d9!rzg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CSRF_COOKIE_SECURE = False
 
 ALLOWED_HOSTS = [u'vladkim10.pythonanywhere.com','localhost','127.0.0.1']
 
