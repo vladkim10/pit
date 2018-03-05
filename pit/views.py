@@ -16,14 +16,15 @@ def kzt_list(request):
 
 @csrf_exempt
 def success(request):
+    response = request.POST['response']
+    result = kkb.postlink(response)
     transaction = Transaction()
-    transaction.description = "dumb"
+    transaction.description = result.data["CUSTOMER_NAME"]
     transaction.date = timezone.now()
-    transaction.amount = 0
+    transaction.amount = int(result.data['ORDER_AMOUNT'])
     transaction.save()
     if request.method == "POST":
-      response = request.POST['response']
-      result = kkb.postlink(response)
+      
       if result.status:
          transaction = Transaction()
          transaction.description = result.data["CUSTOMER_NAME"]
