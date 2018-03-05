@@ -16,20 +16,19 @@ def kzt_list(request):
 
 @csrf_exempt
 def success(request):
-    response = request.POST['response']
-    result = kkb.postlink(response)
     transaction = Transaction()
-    transaction.description = result.data["CUSTOMER_NAME"]
+    transaction.description = "dumb"
     transaction.date = timezone.now()
-    transaction.amount = int(result.data['ORDER_AMOUNT'])
+    transaction.amount = 0
     transaction.save()
     if request.method == "POST":
-      
+      response = request.POST['response']
+      result = kkb.postlink(response)
       if result.status:
          transaction = Transaction()
          transaction.description = result.data["CUSTOMER_NAME"]
          transaction.date = timezone.now()
-         transaction.amount = int(result.data['ORDER_AMOUNT'])
+         transaction.amount = int(result.data["ORDER_AMOUNT"])
          transaction.save()
          return render(request, 'pit/message.html', {'message': 'success!!! added ' + str(transaction.amount) + ' KZT!'})
       else:
