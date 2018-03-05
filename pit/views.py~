@@ -30,7 +30,6 @@ def success(request):
          transaction.date = timezone.now()
          transaction.amount = int(result.data['ORDER_AMOUNT'])
          transaction.save()
-         return HttpResponse("Your response")
          return render(request, 'pit/message.html', {'message': 'success!!! added ' + str(transaction.amount) + ' KZT!'})
       else:
          return render(request, 'pit/message.html', {'message': "we've got problem: " + result.message})
