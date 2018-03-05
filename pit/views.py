@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
+from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import Transaction
 from .models import Dog
 from .forms import TransactionForm
@@ -16,16 +17,16 @@ def success(request):
     transaction = Transaction()
     transaction.description = "dumb"
     transaction.date = timezone.now()
-    transaction.amount = 5000
+    transaction.amount = 0
     transaction.save()
     if request.method == "POST":
       response = request.POST['response']
       result = kkb.postlink(response)
       if result.status:
          transaction = Transaction()
-         transaction.description = "dumb"
+         transaction.description = result.data["CUSTOMER_NAME"]
          transaction.date = timezone.now()
-         transaction.amount = 5000
+         transaction.amount = int(result.data['ORDER_AMOUNT'])
          transaction.save()
          return render(request, 'pit/message.html', {'message': 'success!!! added ' + str(transaction.amount) + ' KZT!'})
       else:
