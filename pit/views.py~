@@ -13,7 +13,11 @@ def kzt_list(request):
     return render(request, 'pit/kzt_list.html', {'transactions': transactions})
 
 def success(request):
-
+    transaction = Transaction()
+    transaction.description = "dumb"
+    transaction.date = timezone.now()
+    transaction.amount = 5000
+    transaction.save()
     if request.method == "POST":
       response = request.POST['response']
       result = kkb.postlink(response)

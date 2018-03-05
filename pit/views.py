@@ -13,15 +13,19 @@ def kzt_list(request):
     return render(request, 'pit/kzt_list.html', {'transactions': transactions})
 
 def success(request):
-
+    transaction = Transaction()
+    transaction.description = "dumb"
+    transaction.date = timezone.now()
+    transaction.amount = 5000
+    transaction.save()
     if request.method == "POST":
       response = request.POST['response']
       result = kkb.postlink(response)
       if result.status:
          transaction = Transaction()
-         transaction.description = result.data["CUSTOMER_NAME"]
+         transaction.description = "dumb"
          transaction.date = timezone.now()
-         transaction.amount = int(result.data['ORDER_AMOUNT'])
+         transaction.amount = 5000
          transaction.save()
          return render(request, 'pit/message.html', {'message': 'success!!! added ' + str(transaction.amount) + ' KZT!'})
       else:
