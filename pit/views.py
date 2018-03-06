@@ -11,16 +11,12 @@ import kkb
 
 
 def kzt_list(request):
+    user = request.user
     transactions = Transaction.objects.filter(date__lte=timezone.now()).order_by('date')
-    return render(request, 'pit/kzt_list.html', {'transactions': transactions})
+    return render(request, 'pit/kzt_list.html', {'transactions': transactions, 'username': user.username})
 
 @csrf_exempt
 def success(request):
-    transaction = Transaction()
-    transaction.description = "dumb"
-    transaction.date = timezone.now()
-    transaction.amount = 0
-    transaction.save()
     if request.method == "POST":
       response = request.POST['response']
       result = kkb.postlink(response)
