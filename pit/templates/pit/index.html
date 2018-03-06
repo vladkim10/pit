@@ -13,7 +13,7 @@
 
 <div class="page-header">
     <h1><center>Dogs <h3>{{ username }}</h3> </center></h1>
-<a style="margin-right: 0;" class="btn btn-dark" href="{% url "login" %}" role="button" style="margin: 2em">Log in</a>
+{% if username == "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "login" %}" role="button" style="margin: 2em">Log in</a> {% endif %}
 {% if username != "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "logout" %}" role="button" style="margin: 2em">Log out</a> {% endif %}
 </div>
 <div class="main">
