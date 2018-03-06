@@ -2,12 +2,34 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login
+from django.views.generic.edit import FormView
+from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponseRedirect
+from django.views.generic.base import View
+from django.contrib.auth import logout
 from .models import Transaction
 from .models import Dog
 from .forms import TransactionForm
 from .forms import DogForm
 import kkb
 # Create your views here.
+
+class LoginFormView(FormView):
+    form_class = AuthenticationForm
+    template_name = "pit/login.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        self.user = form.get_user()
+        login(self.request, self.user)
+        return super(LoginFormView, self).form_valid(form)
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect("/")
 
 
 def kzt_list(request):
@@ -32,8 +54,9 @@ def success(request):
     return render(request, 'pit/message.html', {'message': "something strange"})
 
 def index(request):
+    user = request.user
     dogs = Dog.objects.all()
-    return render(request, 'pit/index.html', {'dogs': dogs})
+    return render(request, 'pit/index.html', {'dogs': dogs, 'username': user.username})
 
 def transaction_new(request):
     if request.method == "POST":

@@ -12,7 +12,9 @@
     <body>
 
 <div class="page-header">
-    <h1><center>Dogs</center></h1>
+    <h1><center>Dogs <h3>{{ username }}</h3> </center></h1>
+<a style="margin-right: 0;" class="btn btn-dark" href="{% url "login" %}" role="button" style="margin: 2em">Log in</a>
+{% if username != "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "logout" %}" role="button" style="margin: 2em">Log out</a> {% endif %}
 </div>
 <div class="main">
 <div style="display:flex; flex-wrap: wrap; flow-direction: row">
@@ -34,7 +36,7 @@
 {% endfor %}
 </div>	
     <a class="btn btn-dark" href="{% url "kzt_list" %}" role="button" style="margin: 2em">See transactions</a>
-    <a href="{% url 'dog_new' %}" class = "btn btn-success"><span class="glyphicon glyphicon-plus"></span><strong>+</strong> Add dog</a>
+   {% if username != "" %}<a href="{% url 'dog_new' %}" class = "btn btn-success"><span class="glyphicon glyphicon-plus"></span><strong>+</strong> Add dog</a> {% endif %}
 </div>
     </body>
 </html>
