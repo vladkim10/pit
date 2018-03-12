@@ -1,6 +1,24 @@
 from django.db import models
 from django.utils import timezone
 # Create your models here.
+class OtherPets(models.Model):
+  url = models.CharField(max_length=1000,default="", blank=True)
+  name = models.CharField(max_length=1000,default="", blank=True)
+  description = models.TextField()
+  date = models.DateTimeField(default=timezone.now)
+  
+  def __str__(self):
+    return self.name
+
+class Cat(models.Model):
+  url = models.CharField(max_length=1000,default="", blank=True)
+  name = models.CharField(max_length=1000,default="", blank=True)
+  description = models.TextField()
+  date = models.DateTimeField(default=timezone.now)
+  
+  def __str__(self):
+    return self.name
+
 class Dog(models.Model):
   url = models.CharField(max_length=1000,default="", blank=True)
   name = models.CharField(max_length=1000,default="", blank=True)

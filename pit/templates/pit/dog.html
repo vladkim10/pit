@@ -1,0 +1,42 @@
+﻿{% load staticfiles %}
+<html>
+    <head>
+       <title>Main</title>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+       <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
+       <link rel="stylesheet" href="{% static 'css/pit.css' %}">
+       <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+       </head>
+    <body>
+
+<div class="page-header">
+    <h1><center>Dogs <h3>{{ username }}</h3> </center></h1>
+{% if username == "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "login" %}" role="button" style="margin: 2em">Log in</a> {% endif %}
+{% if username != "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "logout" %}" role="button" style="margin: 2em">Log out</a> {% endif %}
+</div>
+<div class="main">
+<div style="display:flex; flex-wrap: wrap; flow-direction: row">
+{% for Dog in dogs %}
+<div class="mdc-card  mdc-card--theme-dark demo-card demo-card--bg-demo" style="height: 350px; width: 400px; margin: 2em;
+    background-image: url({{ Dog.url }});
+    background-size:  cover;
+    background-repeat: no-repeat;
+    display: flex">
+            <section class="mdc-card__primary" style="background: rgba(0, 0, 0, .4);">
+              <h1 class="mdc-card__title mdc-card__title--large">{{ Dog.name }}</h1>
+              <h2 class="mdc-card__subtitle">{{Dog.description}}</h2>
+            </section>
+            <section class="mdc-card__actions" style="background: rgba(0, 0, 0, .4); display: block;">
+              <button class="mdc-button mdc-button--compact mdc-button--theme-dark mdc-card__action"><font color="#D3D3D3"><strong>Купить собаку</font></button>
+              <button class="mdc-button mdc-button--compact mdc-button--theme-dark mdc-card__action" style= "float: right"><font color="#D3D3D3"><strong>Донат</font></button>
+            </section>
+          </div>
+{% endfor %}
+</div>	
+    <a class="btn btn-dark" href="{% url "kzt_list" %}" role="button" style="margin: 2em">See transactions</a>
+   {% if username != "" %}<a href="{% url 'dog_new' %}" class = "btn btn-success"><span class="glyphicon glyphicon-plus"></span><strong>+</strong> Add dog</a> {% endif %}
+</div>
+    </body>
+</html>

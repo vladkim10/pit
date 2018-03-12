@@ -13,6 +13,10 @@ from .models import Transaction
 from .models import Dog
 from .forms import TransactionForm
 from .forms import DogForm
+from .models import Cat
+from .forms import CatForm
+from .models import OtherPets
+from .forms import OtherPetsForm
 import kkb
 # Create your views here.
 
@@ -55,8 +59,13 @@ def success(request):
 
 def index(request):
     user = request.user
+    return render(request, 'pit/index.html', {'username': user.username})
+
+
+def dog(request):
+    user = request.user
     dogs = Dog.objects.all()
-    return render(request, 'pit/index.html', {'dogs': dogs, 'username': user.username})
+    return render(request, 'pit/dog.html', {'dogs': dogs, 'username': user.username})
 
 def transaction_new(request):
     if request.method == "POST":
@@ -79,7 +88,43 @@ def dog_new(request):
             dog.author = request.user
             dog.date = timezone.now()
             dog.save()
-            return redirect('index')
+            return redirect('dog')
     else:
         form = DogForm()
     return render(request, 'pit/dog_edit.html', {'form': form})
+
+def cat(request):
+    user = request.user
+    cat = Cat.objects.all()
+    return render(request, 'pit/cat.html', {'cat': cat, 'username': user.username})
+
+def cat_new(request):
+    if request.method == "POST":
+        form = CatForm(request.POST)
+        if form.is_valid():
+            cat = form.save(commit=False)
+            cat.author = request.user
+            cat.date = timezone.now()
+            cat.save()
+            return redirect('cat')
+    else:
+        form = CatForm()
+    return render(request, 'pit/cat_edit.html', {'form': form})
+
+def otherPets(request):
+    user = request.user
+    otherPets = OtherPets.objects.all()
+    return render(request, 'pit/otherPets.html', {'otherPets': otherPets, 'username': user.username})
+
+def otherPets_new(request):
+    if request.method == "POST":
+        form = OtherPetsForm(request.POST)
+        if form.is_valid():
+            otherPets = form.save(commit=False)
+            otherPets.author = request.user
+            otherPets.date = timezone.now()
+            otherPets.save()
+            return redirect('otherPets')
+    else:
+        form = OtherPetsForm()
+    return render(request, 'pit/otherPets_edit.html', {'form': form})
