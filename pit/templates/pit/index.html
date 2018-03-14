@@ -1,5 +1,18 @@
 {% load staticfiles %}
 <html>
+<script>
+function screen() {
+var bod = document.getElementById("bod");
+var b = document.getElementById("b");
+var h = "height: " + b.clientHeight*0.13 +";";
+var w = "width: " + bod.clientWidth + ";";
+bod.style.height = h;
+bod.style.width = w;
+console.log(h);
+console.log(w);
+}
+window.onload = screen;
+ </script>
     <head>
        <title>Main</title>
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -9,8 +22,9 @@
       rel="stylesheet"
       href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
        </head>
-    <body>
-
+<body id="b">
+<div class = "sky" id="bod">
+ 
 <div class="page-header">
     <h1><center>Welcome to Main page <h3>{{ username }}</h3> </center></h1>
 {% if username == "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "login" %}" role="button" style="margin: 2em">Log in</a> {% endif %}
@@ -23,5 +37,6 @@
     <a class="btn btn-dark" href="{% url "kzt_list" %}" role="button" style="margin: 2em">See transactions</a>
     <a class = "btn btn-success" href="{% url "kkb_init" %}" role="button" style="margin: 2em">Donate</a>
 </div>	
+</div>
     </body>
 </html>

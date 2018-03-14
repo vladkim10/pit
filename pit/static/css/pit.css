@@ -1,5 +1,4 @@
 .page-header {
-    background-color: #ff9400;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
 }
@@ -52,4 +51,12 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
+
+.sky {
+ background-image: url("https://psv4.userapi.com/c834704/u59639756/docs/d2/5faef7dc2996/ppbackground2.png?extra=nC95eyYEQIcfhX3dflHS0WDC0nFssH7z7s1GinFvPFabi4e4_BgFV4DSqr3QCUzONu4gXRHw09jxt76CN_xT8Ut1Jl_UclrPuoblWMSa4zIDBKdmUIK9OuzpbH7uTKxgxZIUktdhLCpE"); 
+ background-size: cover;
+ -moz-background-size: cover; 
+background-repeat: no-repeat;
+height: 100%;
+  }
 
