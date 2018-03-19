@@ -1,42 +1,104 @@
 {% load staticfiles %}
 <html>
-<script>
-function screen() {
-var bod = document.getElementById("bod");
-var b = document.getElementById("b");
-var h = "height: " + b.clientHeight*0.13 +";";
-var w = "width: " + bod.clientWidth + ";";
-bod.style.height = h;
-bod.style.width = w;
-console.log(h);
-console.log(w);
-}
-window.onload = screen;
- </script>
     <head>
+       <meta charset ="utf-8">
        <title>Main</title>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-       <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
        <link rel="stylesheet" href="{% static 'css/pit.css' %}">
-       <link
-      rel="stylesheet"
-      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
-       </head>
-<body id="b">
-<div class = "sky" id="bod">
- 
-<div class="page-header">
-    <h1><center>Welcome to Main page <h3>{{ username }}</h3> </center></h1>
-{% if username == "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "login" %}" role="button" style="margin: 2em">Log in</a> {% endif %}
-{% if username != "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "logout" %}" role="button" style="margin: 2em">Log out</a> {% endif %}
-</div>
-<div class="main">
-    <a class="btn btn-dark" href="{% url "dog" %}" role="button" style="margin: 2em">Dogs</a>
-    <a class="btn btn-dark" href="{% url "cat" %}" role="button" style="margin: 2em">Cats</a>
-    <a class="btn btn-dark" href="{% url "otherPets" %}" role="button" style="margin: 2em">Other Pets</a>
-    <a class="btn btn-dark" href="{% url "kzt_list" %}" role="button" style="margin: 2em">See transactions</a>
-    <a class = "btn btn-success" href="{% url "kkb_init" %}" role="button" style="margin: 2em">Donate</a>
-</div>	
-</div>
-    </body>
+       <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    </head>
+<body>
+    <div class="sky">
+        <img src="{% static 'pictures/b.png' %}" width="100%" height="100%" alt="">
+    </div>
+    <div class="content">
+        <div class="dropdown">
+                <a class="menu" href=#>
+                    Животные
+                </a>
+                <a class="dMenu" href="{% url "dog" %}">
+                    Собаки
+                </a>
+                <a class="dMenu" href="{% url "cat" %}">
+                    Кошки
+                </a>
+                <a class="dMenu" href="{% url "otherPets" %}">
+                    Другие
+                </a>   
+        </div>
+        <div id="header">
+            <a class="logo" href=#>
+                <b>Pit</b>
+                <br><font size="1px">{{ username }}</font>
+            </a>
+            <a class="trans" href="{% url "kzt_list" %}">
+            История транзакций
+            </a>
+            <a class="contacts" href=#>
+                Контакты |
+            </a>
+           {% if username == "" %}<a class="login" data-toggle="modal" href="#myModal">Login</a>{% endif %}
+           {% if username != "" %}<a class="login" href="{% url "logout" %}">
+                Выход
+            </a>{% endif %}
+        </div>
+        <div id="text">
+            <div id="title">
+                Вас приветствует сайт питомника
+            </div> 
+            <div id="maintext">
+                Здесь вы можете помочь и приютить бездомных животных.
+            </div>
+        </div>
+        <a class="donate" href="{% url "kkb_init" %}">
+            Донат +
+        </a>
+    </div>	
+
+
+   <!--  BOOTSTRAP LOGIN MODAL FORM  -->
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content" style="background-color: blue">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:red;"><span class="glyphicon glyphicon-lock"></span> Login</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" method="POST" action="{% url 'login' %}">
+		{% csrf_token %}
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <input type="text" class="form-control" id="usrname" name="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <input type="password" class="form-control" id="psw" name="password" placeholder="Enter password">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="" checked>Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Not a member? <a href="#">Sign Up</a></p>
+          <p>Forgot <a href="#">Password?</a></p>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+</body>
 </html>
