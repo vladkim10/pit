@@ -19,9 +19,26 @@
     <div class="sky">
         <img src="{% static 'pictures/b.png' %}" width="100%" height="100%" alt="">
     </div>
-    <div id="donfr"> <iframe src = "{% url "kkb_init" %}"><a href="#" onclick="x()">закрыть</a> </iframe> </div>
-    <div class="content">
-        <div class="dropdown">
+    <div id="donfr" onclick="x()"> <iframe src = "{% url "kkb_init" %}"></iframe></div>
+    <div class="content">      
+            <a class="logo" href=#>
+                <b>Pit</b>
+                <br><font size="1px">{{ username }}</font>
+            </a>
+	    
+	{% if username == "" %}<a class="login" data-toggle="modal" href="#myModal">Login</a>{% endif %}
+           {% if username != "" %}<a class="login" href="{% url "logout" %}">
+                Выход
+            </a>{% endif %}
+<a class="contacts" href=#>
+                Контакты |
+            </a>
+            <a class="trans" href="{% url "kzt_list" %}">
+            История транзакций
+            </a>
+            
+           
+<div class="dropdown">
                 <a class="menu" href=#>
                     Животные
                 </a>
@@ -34,23 +51,7 @@
                 <a class="dMenu" href="{% url "pets" pet_type='other' %}">
                     Другие
                 </a>   
-        </div>
-        <div id="header">
-            <a class="logo" href=#>
-                <b>Pit</b>
-                <br><font size="1px">{{ username }}</font>
-            </a>
-            <a class="trans" href="{% url "kzt_list" %}">
-            История транзакций
-            </a>
-            <a class="contacts" href=#>
-                Контакты |
-            </a>
-           {% if username == "" %}<a class="login" data-toggle="modal" href="#myModal">Login</a>{% endif %}
-           {% if username != "" %}<a class="login" href="{% url "logout" %}">
-                Выход
-            </a>{% endif %}
-        </div>
+           </div>
         <div id="text">
             <div id="title">
                 Вас приветствует сайт питомника

@@ -56,7 +56,6 @@ a.logo:hover, a.logo:active {
 
 a.menu:link, a.menu:visited {
     text-align: center;
-    padding-top: 20px;
     display: inline-block;
     text-decoration: none;
     transition: 1s;
@@ -70,8 +69,7 @@ a.menu:hover, a.menu:active {
 }
 
 a.dMenu:link, a.dMenu:visited {
-    padding-left: 32%;
-    padding-top: 10px;
+    padding-top: 5%;
     text-decoration: none;
     font-size: 150%;
     color: rgba(230, 240, 255, 0.7);
@@ -92,14 +90,17 @@ a.dMenu {
 }
 
 .dropdown {
-    margin-left: 40%;
-    position: absolute;
+	float: right;
+margin-right: 5%;
+right: 0;
+padding-top: 1.5%;
 }
 
 #text {
     margin-left: 10%;
-    margin-top: 10%;
+    margin-top: 15%;
     display: block;
+	width: 40%;
 }
 
 #title {
@@ -127,7 +128,6 @@ a.donate:link, a.donate:visited {
     background-color: rgba(230, 240, 255, 0.7);
     color: rgba(77, 166, 255, 0.9);
     font-size: 150%;
-    float: left;
     transition: 1s;
     -webkit-transition: 1s;
     position: absolute;
@@ -140,14 +140,15 @@ a.donate:hover, a.donate:active {
 
 a.trans:link, a.trans:visited {
     text-align: center;
-    padding: 20px;
     display: inline-block;
     text-decoration: none;
     transition: 1s;
     -webkit-transition: 1s;
     font-size: 150%;
     color: rgba(230, 240, 255, 0.7);
-    margin-left: 40%;
+float: right;
+margin-right: 5%;
+padding-top: 1.5%;
 }
 
 a.trans:hover, a.trans:active {
@@ -157,13 +158,13 @@ a.trans:hover, a.trans:active {
 a.contacts:link, a.contacts:visited {
     text-align: center;
     display: inline-block;
-    padding-top: 20px;
+    padding-top: 1.5%;
     text-decoration: none;
     transition: 1s;
     -webkit-transition: 1s;
     font-size: 150%;
     color: rgba(230, 240, 255, 0.7);
-    margin-left: 5%;
+float: right;
 }
 
 a.contacts:hover, a.contacts:active {
@@ -174,11 +175,13 @@ a.login:link, a.login:visited {
     text-align: center;
     display: inline-block;
     text-decoration: none;
-    right: 0px;
     transition: 1s;
     -webkit-transition: 1s;
     font-size: 150%;
     color: rgba(230, 240, 255, 0.7);
+	float: right;
+padding-top: 1.5%;
+margin-right: 5%;
 }
 
 a.login:hover, a.login:active {
