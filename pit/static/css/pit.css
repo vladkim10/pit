@@ -103,7 +103,7 @@ padding-top: 1.5%;
     margin-left: 10%;
     margin-top: 15%;
     display: block;
-	width: 40%;
+	width: 90%;
 }
 
 #title {
@@ -196,7 +196,6 @@ html {
 }
 
 #maintext {
-    margin-top: 5%;
     color: rgba(230, 240, 255, 0.9);
     font-size: 150%;
     transition: 1s;
