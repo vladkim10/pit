@@ -16,6 +16,8 @@ left: 0;
 top: 0;
 z-index: 1;
 background-position: right bottom;
+background-repeat: no-repeat;
+background-size: cover;
   }
 
 .content {
