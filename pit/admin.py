@@ -1,10 +1,8 @@
 from django.contrib import admin
-from pit.models import Dog
+from pit.models import Pet
 from pit.models import Transaction
-from pit.models import Cat
-from pit.models import OtherPets
+from pit.models import Client
 # Register your models here.
-admin.site.register(Dog)
+admin.site.register(Pet)
 admin.site.register(Transaction)
-admin.site.register(Cat)
-admin.site.register(OtherPets)
+admin.site.register(Client)

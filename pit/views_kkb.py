@@ -2,9 +2,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Transaction
-from .models import Dog
 from .forms import TransactionForm
-from .forms import DogForm
 import kkb
 import random
 # Create your views here.

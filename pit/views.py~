@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,13 +10,11 @@ from django.http import HttpResponseRedirect
 from django.views.generic.base import View
 from django.contrib.auth import logout
 from .models import Transaction
-from .models import Dog
+from .models import Pet
 from .forms import TransactionForm
-from .forms import DogForm
-from .models import Cat
-from .forms import CatForm
-from .models import OtherPets
-from .forms import OtherPetsForm
+from .forms import PetForm
+from .models import Client
+from .forms import ClientForm
 import kkb
 # Create your views here.
 
@@ -40,6 +38,19 @@ def kzt_list(request):
     user = request.user
     transactions = Transaction.objects.filter(date__lte=timezone.now()).order_by('date')
     return render(request, 'pit/kzt_list.html', {'transactions': transactions, 'username': user.username})
+  
+def transaction_new(request):
+    if request.method == "POST":
+        form = TransactionForm(request.POST)
+        if form.is_valid():
+            transaction = form.save(commit=False)
+            transaction.author = request.user
+            transaction.date = timezone.now()
+            transaction.save()
+            return redirect('kzt_list')
+    else:
+        form = TransactionForm()
+    return render(request, 'pit/transaction_edit.html', {'form': form})
 
 @csrf_exempt
 def success(request):
@@ -61,70 +72,79 @@ def index(request):
     user = request.user
     return render(request, 'pit/index.html', {'username': user.username})
 
-
-def dog(request):
+def pets_view(request, pet_type):
     user = request.user
-    dogs = Dog.objects.all()
-    return render(request, 'pit/dog.html', {'dogs': dogs, 'username': user.username})
+    pets = Pet.objects.filter(hidden=True, pet_type = pet_type)
+    return render(request, 'pit/pet.html', {'pets': pets, 'username': user.username, 'pet_type': pet_type})
 
-def transaction_new(request):
+def pet_new(request, pet_type):
     if request.method == "POST":
-        form = TransactionForm(request.POST)
-        if form.is_valid():
-            transaction = form.save(commit=False)
-            transaction.author = request.user
-            transaction.date = timezone.now()
-            transaction.save()
-            return redirect('kzt_list')
-    else:
-        form = TransactionForm()
-    return render(request, 'pit/transaction_edit.html', {'form': form})
+        # form = PetForm(request.POST)
+        try:
+          pet = Pet()
+          pet.name = request.POST.get("name","default_name")
+          pet.picture_1 = request.POST.get("picture_1","http://")
+          pet.picture_2 = request.POST.get("picture_2","http://")
+          pet.picture_3 = request.POST.get("picture_3","http://")
+          pet.description = request.POST.get("description","No description")
+          pet.main_description = request.POST.get("main_description","No main description")
+          pet.age = request.POST.get("age",1)
+          pet.pet_type = pet_type
+          pet.author = request.user
+          pet.date = timezone.now()
+          pet.save()
+          return redirect('index')
+        except:
+          pass
+    return render(request, 'pit/pet_edit.html')
 
-def dog_new(request):
-    if request.method == "POST":
-        form = DogForm(request.POST)
-        if form.is_valid():
-            dog = form.save(commit=False)
-            dog.author = request.user
-            dog.date = timezone.now()
-            dog.save()
-            return redirect('dog')
-    else:
-        form = DogForm()
-    return render(request, 'pit/dog_edit.html', {'form': form})
-
-def cat(request):
+def hidden_pet(request):
     user = request.user
-    cat = Cat.objects.all()
-    return render(request, 'pit/cat.html', {'cat': cat, 'username': user.username})
+    pets = Pet.objects.filter(hidden=False)
+    return render(request, 'pit/hidden_pet.html', {'pets': pets, 'username': user.username})
 
-def cat_new(request):
-    if request.method == "POST":
-        form = CatForm(request.POST)
-        if form.is_valid():
-            cat = form.save(commit=False)
-            cat.author = request.user
-            cat.date = timezone.now()
-            cat.save()
-            return redirect('cat')
-    else:
-        form = CatForm()
-    return render(request, 'pit/cat_edit.html', {'form': form})
+def morepet(request, pk):
+    pet = get_object_or_404(Pet, pk=pk)
+    return render(request, 'pit/more_pet.html', {'pet': pet})
 
-def otherPets(request):
+def delete_pet(request, pk):
+    pet = get_object_or_404(Pet, pk=pk)
+    pet.hidden = False
+    pet.save()
+    return redirect('index')
+
+def return_pet(request, pk):
+    pet = get_object_or_404(Pet, pk=pk)
+    pet.hidden = True
+    pet.save()
+    return redirect('hidden_pet')
+
+
+def client(request):
     user = request.user
-    otherPets = OtherPets.objects.all()
-    return render(request, 'pit/otherPets.html', {'otherPets': otherPets, 'username': user.username})
+    clients = Client.objects.all
+    return render(request, 'pit/client.html', {'clients': clients, 'username': user.username})
 
-def otherPets_new(request):
+
+def client_new(request, pk):
     if request.method == "POST":
-        form = OtherPetsForm(request.POST)
-        if form.is_valid():
-            otherPets = form.save(commit=False)
-            otherPets.author = request.user
-            otherPets.date = timezone.now()
-            otherPets.save()
-            return redirect('otherPets')
-    else:
-        form = OtherPetsForm()
-    return render(request, 'pit/otherPets_edit.html', {'form': form})
+      pet = get_object_or_404(Pet, pk=pk)
+      try:	
+        client = Client()
+        client.name = request.POST.get("name","default_name")
+        client.number = request.POST.get("number", "-")
+        client.pet_name = pet.name
+        client.author = request.user
+        client.date = timezone.now()
+        client.save()
+        return redirect('thanks')
+      except:
+        pass
+    return render(request, 'pit/client_edit.html')
+
+
+def thanks(request):
+    return render(request, 'pit/thanks.html')
+
+
+

@@ -1,30 +1,25 @@
 from django.db import models
 from django.utils import timezone
 # Create your models here.
-class OtherPets(models.Model):
-  url = models.CharField(max_length=1000,default="", blank=True)
-  name = models.CharField(max_length=1000,default="", blank=True)
-  description = models.TextField()
-  date = models.DateTimeField(default=timezone.now)
-  
-  def __str__(self):
-    return self.name
 
-class Cat(models.Model):
-  url = models.CharField(max_length=1000,default="", blank=True)
+class Pet(models.Model):
+  pet_type = models.CharField(max_length=100, default = "")
+  picture_1 = models.CharField(max_length=1000,default="", blank=True)
+  picture_2 = models.CharField(max_length=1000,default="", blank=True)
+  picture_3 = models.CharField(max_length=1000,default="", blank=True)
   name = models.CharField(max_length=1000,default="", blank=True)
-  description = models.TextField()
+  description = models.TextField(default="")
+  main_description = models.TextField(default="")
+  age = models.IntegerField()
+  gender_choices = (
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+  )
+  gender = models.CharField(max_length=100, choices = gender_choices)
+  breed = models.CharField(max_length=100,default="", blank=True)
   date = models.DateTimeField(default=timezone.now)
-  
-  def __str__(self):
-    return self.name
-
-class Dog(models.Model):
-  url = models.CharField(max_length=1000,default="", blank=True)
-  name = models.CharField(max_length=1000,default="", blank=True)
-  description = models.TextField()
-  date = models.DateTimeField(default=timezone.now)
-  
+  hidden = models.BooleanField(default=True)
+    
   def __str__(self):
     return self.name
 
@@ -36,17 +31,12 @@ class Transaction(models.Model):
   def __str__(self):
     return self.description + " " + str(self.amount) + " kzt"
 
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    text = models.TextField()
-    created_date = models.DateTimeField(
-            default=timezone.now)
-    published_date = models.DateTimeField(
-            blank=True, null=True)
 
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+class Client(models.Model):
+  pet_name = models.CharField(max_length=100, default = "")
+  name = models.CharField(max_length=100,default="", blank=True)
+  number = models.CharField(max_length=100,default="", blank=True)
+  date = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return self.title
+  def __str__(self):
+    return self.name
