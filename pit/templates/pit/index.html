@@ -16,8 +16,7 @@
        <script src="{% static 'scripts/index.js' %}"></script>
     </head>
 <body>
-    <div class="sky">
-        <img src="{% static 'pictures/b.png' %}" width="100%" height="100%" alt="">
+    <div class="sky" style="background-image: url({% static 'pictures/b.png' %})">
     </div>
     <div id="donfr" onclick="x()"> <iframe src = "{% url "kkb_init" %}"></iframe></div>
     <div class="content">      
