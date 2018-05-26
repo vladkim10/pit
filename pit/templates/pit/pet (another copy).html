@@ -1,0 +1,69 @@
+﻿{% load staticfiles %}
+<html>
+    <head>
+       <title>Сайт питомника</title>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+       <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
+       <link rel="stylesheet" href="{% static 'css/index.css' %}">
+       <link rel="stylesheet" href="{% static 'css/pet.css' %}">
+       <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+       </head>
+    <body>
+	<div class="main">
+		<a class="logo" href=#>
+                	<b>Pit</b>
+                	<br><font size="1px">{{ username }}</font>
+            	</a>
+	    
+		{% if username == "" %}<a class="login" data-toggle="modal" href="#myModal">Login</a>{% endif %}
+           	{% if username != "" %}<a class="login" href="{% url "logout" %}">
+                	Выход
+            	</a>{% endif %}
+		<a class="contacts" href=#>
+                	Контакты |
+           	 </a>
+            	<a class="trans" href="{% url "kzt_list" %}">
+            		История транзакций
+            	</a>   
+           
+		<div class="dropdown">
+                	<a class="menu" href=#>
+                    		{% if pet_type == "dog" %}Собаки{% endif %}
+				{% if pet_type == "cat" %}Кошки{% endif %}
+				{% if pet_type == "other" %}Другие{% endif %}
+                	</a>
+                	<a class="dMenu" href="{% if pet_type == "dog" %}{% url "pets" pet_type='cat' %}{% else %}{% url "pets" pet_type='dog' %}{% endif %}">
+                    		{% if pet_type == "dog" %}Кошки{% endif %}
+				{% if pet_type == "cat" %}Собаки{% endif %}
+				{% if pet_type == "other" %}Собаки{% endif %}
+                	</a>
+                	<a class="dMenu" href="{% if pet_type == "other" %}{% url "pets" pet_type='cat' %}{% else %}{% url "pets" pet_type='other' %}{% endif %}">
+                    		{% if pet_type == "dog" %}Другие{% endif %}
+				{% if pet_type == "cat" %}Другие{% endif %}
+				{% if pet_type == "other" %}Кошки{% endif %}
+                	</a>   
+           	</div>
+
+		<div style="display:flex; flex-wrap: wrap; flow-direction: row">
+			{% for Pet in pets %}
+<div class="mdc-card  mdc-card--theme-dark demo-card demo-card--bg-demo" style="height: 350px; width: 400px; margin: 2em;
+    background-image: url({{ Pet.picture_1 }});
+    background-size:  cover;
+    background-repeat: no-repeat;
+    display: flex">
+            <section class="mdc-card__primary" style="background: rgba(0, 0, 0, .4);">
+              {% if username != "" %}<h1 class="mdc-card__title mdc-card__title--large">{{ Pet.name }}<a href="{% url 'delete_pet' pk=Pet.pk %}"class = "btn btn-success"><span class="glyphicon glyphicon-plus"></span>X</a>{% endif %}
+              <h2 class="mdc-card__subtitle">{{Pet.description}}</h2>
+            </section>
+            <section class="mdc-card__actions" style="background: rgba(0, 0, 0, .4); display: block;">
+              <a href="{% url 'client_new' pk=Pet.pk %}" class="mdc-button mdc-button--compact mdc-button--theme-dark mdc-card__action" style= "float: right"><font color="#D3D3D3"><strong>Забрать {{Pet.pet_type}}</font></a> 
+              <a href="{% url 'morepet' pk=Pet.pk %}" class="mdc-button mdc-button--compact mdc-button--theme-dark mdc-card__action" style= "float: right"><font color="#D3D3D3"><strong>Подробнее</font></a>
+            </section>
+          </div>
+			{% endfor %}
+</div>	
+	</div>
+    </body>
+</html>

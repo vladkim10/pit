@@ -2,20 +2,22 @@
 <html>
     <head>
        <title>New client</title>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-       <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
-       <link rel="stylesheet" href="{% static 'css/pit.css' %}">
+       <link rel="stylesheet" href="{% static 'css/kkb.css' %}">
+       <link rel="stylesheet" href="{% static 'css/client.css' %}">
        <link
       rel="stylesheet"
       href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     </head>
     <body>
-    <h1><center>Оставьте ваши данные, чтобы забрать собаку  {{ pet.name }} </center></h1>
-     <form method="POST" class="client-form">{% csrf_token %}
-       Imya<input type="text" name="name"><br>
-       Nomer telefona<input type="text" name="number"><br>
-        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Подать заявку</button>
-        <a class="btn btn-dark" href="{% url "index" %}" role="button" style="margin: 2em">Main page</a>
-    </form>
+	<div class="content" style="height: 100%;">
+    		<div class="text">
+    		<center>Оставьте ваши данные, чтобы забрать питомца {{ pet.name }} </center>
+     		<form method="POST" class="client-form">{% csrf_token %}
+       		Имя: <input type="text" name="name" class="name"><br>
+       		Тел.: <input type="text" name="number" class="name"><br>
+        	<center><input type="submit" id="submit" class="sub" value="Подать заявку"></center>
+		</form>    		
+		</div>
+	</div>
     </body>
 </html>

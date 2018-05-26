@@ -16,7 +16,7 @@ class PetForm(forms.ModelForm):
 
     class Meta:
         model = Pet
-        fields = ('picture_1', 'picture_2', 'picture_3', 'pet_type', 'name', 'description', 'main_description', 'age', 'gender', 'breed')
+        fields = ('picture_1', 'picture_2', 'picture_3', 'pet_type', 'name', 'description', 'age', 'gender', 'breed')
 
 
 class ClientForm(forms.ModelForm):

@@ -17,6 +17,11 @@ urlpatterns = [
     url(r'^login/$', views.LoginFormView.as_view(), name='login'),
     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
     url(r'^client/$', views.client, name='client'),
+    url(r'^client/(?P<pk>\d+)/delete$', views.delete_client, name='delete_client'),
+    url(r'^client/hidden/$', views.hidden_client, name='hidden_client'),
+    url(r'^client/(?P<pk>\d+)/return$', views.return_client, name='return_client'),
     url(r'^pet/(?P<pk>\d+)/client/new/$', views.client_new, name='client_new'),
-    url(r'^client/new/thanks$', views.thanks, name='thanks')
+    url(r'^client/new/thanks$', views.thanks, name='thanks'),
+    url(r'^condition/$', views.condition, name='condition'),
+    url(r'^pets/new/success/$', views.pet_success, name='pet_success'),
 ]

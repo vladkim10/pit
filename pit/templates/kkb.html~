@@ -1,10 +1,19 @@
-<div class="modal-footer">
+{% load staticfiles %}
+<html>
+<head> <base target="_parent" />
+<link rel="stylesheet" href="{% static 'css/kkb.css' %}">
+</head>
+<body>
+<div class="content">
     <form name="SendOrder" method="POST" action="https://testpay.kkb.kz/jsp/process/logon.jsp">
 	<input type="hidden" name="BackLink" value="http://vladkim10.pythonanywhere.com/transactions">
         <input type="hidden" name="PostLink" value="http://vladkim10.pythonanywhere.com/success">
         <input type="hidden" name="FailureBackLink" value="https://vladkim10.pythonanywhere.com/transactions">
         <input type="hidden" id="Signed_Order_B64" name="Signed_Order_B64" value="{{ kkb_context }}">
 	<input type="hidden" id="order_id" name="order_id" value="{{ order_id }}">
-        <input type="submit" id="submit" class="form-control btn btn-default" value="Сделать донат {{ price }} тенге">
+        <div class="text">Нажимая кнопку, я принимаю <a href="{% url "condition" %}" style="color: rgb(51, 102, 255);">условия соглашения</a>.</div>
+        <center><input type="submit" id="submit" class="sub" value="Сделать донат {{ price }} тенге"></center>
     </form>
-  </div>
+</div>
+</body>
+</html>

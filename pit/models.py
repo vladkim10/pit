@@ -9,11 +9,10 @@ class Pet(models.Model):
   picture_3 = models.CharField(max_length=1000,default="", blank=True)
   name = models.CharField(max_length=1000,default="", blank=True)
   description = models.TextField(default="")
-  main_description = models.TextField(default="")
-  age = models.IntegerField()
+  age = models.CharField(max_length=1000,default="", blank=True)
   gender_choices = (
-    ('Male', 'Male'),
-    ('Female', 'Female'),
+    ('Самец', 'Самец'),
+    ('Самка', 'Самка'),
   )
   gender = models.CharField(max_length=100, choices = gender_choices)
   breed = models.CharField(max_length=100,default="", blank=True)
@@ -37,6 +36,7 @@ class Client(models.Model):
   name = models.CharField(max_length=100,default="", blank=True)
   number = models.CharField(max_length=100,default="", blank=True)
   date = models.DateTimeField(default=timezone.now)
+  hidden = models.BooleanField(default=True)
 
   def __str__(self):
     return self.name

@@ -1,16 +1,17 @@
-<div class="modal-footer">
+{% load staticfiles %}
+<html>
+<head>
+       <link rel="stylesheet" href="{% static 'css/kkb.css' %}">
+</head>
+<body>
+<div class="content">
     <form name="SendOrder" method="POST">
         {% csrf_token %}
-        <div class="selectContainer">
-            <input type="submit" id="submit" class="form-control btn btn-default" value="Сделать донат">
-        </div>
-        <div id="login-error-div"
-             style="margin-bottom: 10px; text-align: center; color: red"></div>
-            <input type="hidden" name="BackLink" value="http://shymbulak.papers.kz/online_booking/">
-            <input type="hidden" name="PostLink" value="http://shymbulak.papers.kz/online_booking/success/">
-            <input type="hidden" name="FailureBackLink" value="http://shymbulak.papers.kz/online_booking/">
-            <input type="hidden" id="Signed_Order_B64" name="Signed_Order_B64" value="-1">
-            <span hidden="hidden" id="order_id"></span>
-            <span hidden="hidden" id="price_hidden"></span>
+<div class="text">
+        Введите сумму для доната</div>
+        <center><input type = "numeric" name="price" value = 1000 class="price"><br></center>
+            <center><input type="submit" id="submit" class="sub" value="Сделать донат"></center>
     </form>
   </div>
+</body>
+</html>

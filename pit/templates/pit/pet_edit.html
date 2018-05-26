@@ -1,26 +1,44 @@
 {% load staticfiles %}
-<html style="overflow: scroll;">
     <head>
-       <title>Main</title>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+       <title>Pet_edit</title>
        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
-       <link rel="stylesheet" href="{% static 'css/pit.css' %}">
+       <link rel="stylesheet" href="{% static 'css/pet_edit.css' %}">
        <link
       rel="stylesheet"
       href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     </head>
     <body>
-    <h1><center>New pet</center></h1>
-     <form method="POST" class="pet-form">{% csrf_token %}
-       Imya<input type="text" name="name"><br>
-       Risunok 1<input type="text" name="picture_1"><br>
-       Risunok 2<input type="text" name="picture_2"><br>
-       Risunok 3<input type="text" name="picture_3"><br>
-       description:<input type="text" name="description"><br>
-       main description:<input type="text" name="main_description"><br>
-       Vozrast <input type="number" name="age"><br>
-        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Save</button>
-        <a class="btn btn-dark" href="{% url "index" %}" role="button" style="margin: 2em">Main page</a>
-     </form>
+	<div class="content">
+		<div class="text_header">
+    		<center>Добавить нового питомца</center>
+		</div>
+   		<div class="text">
+     		<form method="POST" class="pet-form">{% csrf_token %}
+       		Имя питомца:<br> <input style="height: 5%; font-size: 100%; text-align: center;" type="text" name="name" class="name"><br>
+		<p></p>
+       		Картинка 1:<br> <input style="height: 5%; font-size: 100%; text-align: center;" type="text" name="picture_1"><br>
+		<p></p>
+       		Картинка 2:<br> <input style="height: 5%; font-size: 100%; text-align: center;" type="text" name="picture_2"><br>
+		<p></p>
+       		Картинка 3:<br> <input style="height: 5%; font-size: 100%; text-align: center;" type="text" name="picture_3"><br>
+		<p></p>
+       		Описание:<br> <textarea style="height: 10%; width: 60%; font-size: 100%; text-align: center;" name="description"></textarea><br>
+		<p></p>
+       		Возраст:<br> <input style="height: 5%; font-size: 100%; text-align: center;" type="text" name="age"><br>
+		<p></p>
+       		Порода:<br> <input style="height: 5%; font-size: 100%; text-align: center;" type="text" name="breed"><br>
+		<p></p>
+       		Пол:<br> <select style="width: 13%; height: 5%; text-align: center; font-size: 100%;" name="gender">
+  <option value="Самец">Самец</option>
+  <option value="Самка">Самка</option>
+</select>
+		<p></p>
+        	<center><input type="submit" id="submit" class="sub" value="Сохранить"></center>
+		</form>    		
+		</div>
+	</div>
     </body>
 </html>
+
+
+</div>

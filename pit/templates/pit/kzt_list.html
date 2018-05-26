@@ -1,41 +1,32 @@
-﻿{% load staticfiles %}
+{% load staticfiles %}
 <html>
     <head>
-       <title>Transactions</title>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+       <title>client</title>
        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
-       <link rel="stylesheet" href="{% static 'css/pit.css' %}">
+       <link rel="stylesheet" href="{% static 'css/client.css' %}">
+       <link rel="stylesheet" href="{% static 'css/kzt_list.css' %}">
        <link
       rel="stylesheet"
       href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
        </head>
-    <body>
-<div class="page-header">
-        <h1><center>History of transactions <h3>{{ username }}</h3></center></h1>
-{% if username == "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "login" %}" role="button" style="margin: 2em">Log in</a> {% endif %}
-{% if username != "" %}<a style="margin-right: 0;" class="btn btn-dark" href="{% url "logout" %}" role="button" style="margin: 2em">Log out</a> {% endif %}
-</div>
-<div>
-<table class="table" style="width: 80%"; align="center">
-   <thead class="thead-dark">
-    <tr>
-        <th>Дата</th>
-        <th>Описание</th>
-        <th style ="text-align: right">Сумма(тг.)</a></th>
-    </tr>
-   </thead>
-   <tbody>
-{% for Transaction in transactions %}    
-    <tr class="p-3 mb-2 {% if Transaction.amount < 0 %} bg-danger text-white  {% endif %}">
-        <th>{{ Transaction.date }}</th>
-        <th>{{ Transaction.description|linebreaksbr }}</th>
-        <th style = "text-align: right">{{ Transaction.amount }}</th>
-    </tr>
-{% endfor %}
-    </tbody>
-</table>
-<a class="btn btn-dark" href="{% url "index" %}" role="button" style="margin-left: 10em;">Main page</a>
-{% if username != "" %}<a href="{% url 'transaction_new' %}" class = "btn btn-success"><span class="glyphicon glyphicon-plus"></span><strong>+</strong> Add transaction</a> {% endif %}
-</div>
+    		<body>
+			<div class="header">История транзакций <a class="header1" href="{% url 'transaction_new' %}">Добавить транзакцию <strong>+</strong></a></div>
+			<div class="content">
+
+	<div class="content_information">
+		<div class="content_information_1" style="font-size: 120%;"><strong>Имя|Описание</strong></div>
+		<div class="content_information_1" style="font-size: 120%;"><strong>Сумма(KZT)</strong></div>
+		<div class="content_information_1" style="font-size: 120%;"><strong>Дата</strong></div>
+	
+			</div>
+				{% for Transaction in transactions %} 
+	<div class="content_information" {% if Transaction.amount < 0 %} style="background-color: red; color: white;"  {% endif %}">
+		<div class="content_information_1" style="font-size: 120%;">{{ Transaction.description|linebreaksbr }}</div>
+		<div class="content_information_1" style="font-size: 120%;">{{ Transaction.amount }}</div>
+		<div class="content_information_1" style="font-size: 120%;">{{ Transaction.date }}</div>
+			</div>
+				{% endfor %}							
+			</div>
+
     </body>
 </html>

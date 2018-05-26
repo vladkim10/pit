@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
     <head>
-       <title>client</title>
+       <title>hidden client</title>
        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
        <link rel="stylesheet" href="{% static 'css/client.css' %}">
        <link
@@ -9,7 +9,7 @@
       href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
        </head>
     		<body>
-			<div class="header">Заявки <a class="header1" href="{% url 'hidden_client' %}">Принятые заявки</a></div>
+			<div class="header">Принятые заявки <a class="header1" href="{% url 'client' %}">Заявки</a></div>
 			<div class="content">
 
 	<div class="content_information">
@@ -23,7 +23,7 @@
 		<div class="content_information_1" style="font-size: 120%;">{{Client.name}}</div>
 		<div class="content_information_1" style="font-size: 120%;">{{Client.number}}</div>
 		<div class="content_information_1" style="font-size: 120%;">{{ Client.pet_name }}</div>
-		<div class="content_information_button"><a class="button_d" href="{% url 'delete_client' pk=Client.pk %}">Принята</a></div>		
+		<div class="content_information_button"><a class="button_d" href="{% url 'return_client' pk=Client.pk %}">Вернуть</a></div>		
 			</div>
 				{% endfor %}							
 			</div>

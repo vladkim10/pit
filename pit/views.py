@@ -16,6 +16,7 @@ from .forms import PetForm
 from .models import Client
 from .forms import ClientForm
 import kkb
+import math
 # Create your views here.
 
 class LoginFormView(FormView):
@@ -41,16 +42,46 @@ def kzt_list(request):
   
 def transaction_new(request):
     if request.method == "POST":
-        form = TransactionForm(request.POST)
-        if form.is_valid():
-            transaction = form.save(commit=False)
-            transaction.author = request.user
-            transaction.date = timezone.now()
-            transaction.save()
-            return redirect('kzt_list')
-    else:
-        form = TransactionForm()
-    return render(request, 'pit/transaction_edit.html', {'form': form})
+        try:
+          transaction = Transaction()
+          transaction.description = request.POST.get("description","No description")
+          transaction.amount = request.POST.get("amount", 0)
+          transaction.author = request.user
+          transaction.date = timezone.now()
+          transaction.save()
+          return redirect('kzt_list')
+        except:
+          pass
+    return render(request, 'pit/transaction_edit.html')
+
+
+def pet_new(request, pet_type):
+    if request.method == "POST":
+        try:
+          pet = Pet()
+          pet.name = request.POST.get("name","default_name")
+          pet.picture_1 = request.POST.get("picture_1","http://")
+          pet.picture_2 = request.POST.get("picture_2","http://")
+          pet.picture_3 = request.POST.get("picture_3","http://")
+          pet.description = request.POST.get("description","No description")
+          pet.age = request.POST.get("age",1)
+          pet.gender = request.POST.get("gender", "Самец")
+          pet.pet_type = pet_type
+          pet.author = request.user
+          pet.date = timezone.now()
+          pet.save()
+          return redirect('pet_success')
+        except:
+
+          pass
+    return render(request, 'pit/pet_edit.html')
+
+
+
+
+
+
+
 
 @csrf_exempt
 def success(request):
@@ -70,12 +101,21 @@ def success(request):
 
 def index(request):
     user = request.user
-    return render(request, 'pit/index.html', {'username': user.username})
+    client_number = len(Client.objects.filter(hidden=True))
+    return render(request, 'pit/index.html', {'username': user.username, 'client_number': client_number})
 
 def pets_view(request, pet_type):
+    page = int(request.GET.get("page",0))
+    number = 8
     user = request.user
-    pets = Pet.objects.filter(hidden=True, pet_type = pet_type)
-    return render(request, 'pit/pet.html', {'pets': pets, 'username': user.username, 'pet_type': pet_type})
+    pages = len(Pet.objects.filter(hidden=True, pet_type = pet_type))
+    pages_links = [] 
+    for i in range(math.ceil(pages/number)):
+        pages_links.append("/pets/"+pet_type+"/?page="+str(i))
+
+
+    pets = Pet.objects.filter(hidden=True, pet_type = pet_type)[page*number:page*number+number]
+    return render(request, 'pit/pet.html', {'pets': pets, 'username': user.username, 'pet_type': pet_type, 'pages':pages_links})
 
 def pet_new(request, pet_type):
     if request.method == "POST":
@@ -87,13 +127,13 @@ def pet_new(request, pet_type):
           pet.picture_2 = request.POST.get("picture_2","http://")
           pet.picture_3 = request.POST.get("picture_3","http://")
           pet.description = request.POST.get("description","No description")
-          pet.main_description = request.POST.get("main_description","No main description")
           pet.age = request.POST.get("age",1)
+          pet.gender = request.POST.get("gender", "Самец")
           pet.pet_type = pet_type
           pet.author = request.user
           pet.date = timezone.now()
           pet.save()
-          return redirect('index')
+          return redirect('pet_success')
         except:
           pass
     return render(request, 'pit/pet_edit.html')
@@ -105,13 +145,19 @@ def hidden_pet(request):
 
 def morepet(request, pk):
     pet = get_object_or_404(Pet, pk=pk)
-    return render(request, 'pit/more_pet.html', {'pet': pet})
+    pets = Pet.objects.all()
+    pets_grouped = [[]]
+    for pet1 in pets:
+       if len(pets_grouped[-1]) >= 3:
+          pets_grouped.append([])
+       pets_grouped[-1].append(pet1)
+    return render(request, 'pit/more_pet.html', {'pet': pet, 'pets': pets, 'pets_grouped': pets_grouped})
 
 def delete_pet(request, pk):
     pet = get_object_or_404(Pet, pk=pk)
     pet.hidden = False
     pet.save()
-    return redirect('index')
+    return redirect('hidden_pet')
 
 def return_pet(request, pk):
     pet = get_object_or_404(Pet, pk=pk)
@@ -122,8 +168,25 @@ def return_pet(request, pk):
 
 def client(request):
     user = request.user
-    clients = Client.objects.all
+    clients = Client.objects.filter(hidden=True)
     return render(request, 'pit/client.html', {'clients': clients, 'username': user.username})
+
+def hidden_client(request):
+    user = request.user
+    clients = Client.objects.filter(hidden=False)
+    return render(request, 'pit/hidden_client.html', {'clients': clients, 'username': user.username})
+
+def delete_client(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    client.hidden = False
+    client.save()
+    return redirect('client')
+
+def return_client(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    client.hidden = True
+    client.save()
+    return redirect('hidden_client')
 
 
 def client_new(request, pk):
@@ -140,11 +203,17 @@ def client_new(request, pk):
         return redirect('thanks')
       except:
         pass
-    return render(request, 'pit/client_edit.html')
+    return render(request, 'pit/client_edit.html', {'pet': pet})
 
 
 def thanks(request):
     return render(request, 'pit/thanks.html')
+
+def condition(request):
+    return render(request, 'pit/condition.html')
+
+def pet_success(request):
+    return render(request, 'pit/pet_edit_success.html')
 
 
 

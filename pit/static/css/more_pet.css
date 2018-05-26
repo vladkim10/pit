@@ -1,0 +1,123 @@
+.carousel-control {
+  width:5%;
+padding-top: 10%;
+}
+
+
+
+html {
+overflow: auto;
+}
+
+.sky {
+position: fixed;
+}
+
+.content_morepet {
+width: 100%;
+height: auto;
+}
+
+.content_picture {
+width: 100%;
+height: 55%;
+background-color: rgba(230, 240, 255, 0.1);
+}
+
+
+.dropdown:hover a.dMenu{
+background-color: rgba(230, 240, 255, 0.1);
+color: white;
+}
+
+a.dMenu:link, a.dMenu:visited {
+    width: 50%;
+    margin-left: 30%;
+    padding-left: 5%;
+}
+
+.content_information {
+width: 100%;
+height: 7%;
+padding-left: 15%;
+padding-right: 15%;
+background-color: rgba(230, 240, 255, 0.1);
+}
+
+.content_information_block {
+height: 100%;
+width: 25%;
+float: left;
+padding-top: 2.5%;
+text-align: center;
+font-size: 150%;
+color: white;
+}
+
+.content_text {
+width: 100%;
+height: auto;
+padding-top: 2%;
+padding-bottom: 2%;
+padding-left: 25%;
+padding-right: 25%;
+background-color: rgba(230, 240, 255, 0.1);
+text-align: justify;
+color: white;
+font-size: 150%;
+}
+
+.content_other_pets {
+width: 70%;
+height: auto;
+margin-left: 15%;
+margin-right: 15%;
+}
+
+.content_other_pets_name {
+width: 100%;
+height: 5%;
+
+padding-top: 2%;
+padding-left: 7%;
+color: white;
+font-size: 150%;
+}
+
+.footer {
+width: 100%;
+height: 5%;
+background-color: rgba(230, 240, 255, 0.5);
+padding-top: 0.6%;
+color: rgba(0, 102, 255, 0.4);
+font-size: 100%;
+transition: 1s;
+}
+
+.footer:hover {
+color: rgba(0, 102, 255, 0.6);
+transition: 1s;
+cursor: default;
+}
+
+#donfr {
+position: fixed;
+}
+
+iframe.ifr {
+width: 25%;
+height: 30%;
+margin-left: 37.5%;
+margin-top: 15%;
+}
+
+
+.kartochka {
+height: 31vh;
+width: 20vw;
+margin-top: 0;
+margin-left: 0;
+margin-left: 3.2%;
+}
+
+

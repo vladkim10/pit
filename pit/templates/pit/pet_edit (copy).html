@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<html style="overflow: scroll;">
+    <head>
+       <title>Main</title>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+       <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css"> 
+       <link rel="stylesheet" href="{% static 'css/pit.css' %}">
+       <link
+      rel="stylesheet"
+      href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    </head>
+    <body>
+    <h1><center>New pet</center></h1>
+     <form method="POST" class="pet-form">{% csrf_token %}
+       Imya<input type="text" name="name"><br>
+       Risunok 1<input type="text" name="picture_1"><br>
+       Risunok 2<input type="text" name="picture_2"><br>
+       Risunok 3<input type="text" name="picture_3"><br>
+       description:<input type="text" name="description"><br>
+       main description:<input type="text" name="main_description"><br>
+       Vozrast <input type="number" name="age"><br>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Save</button>
+        <a class="btn btn-dark" href="{% url "index" %}" role="button" style="margin: 2em">Main page</a>
+     </form>
+    </body>
+</html>
